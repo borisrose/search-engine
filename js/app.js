@@ -1,6 +1,5 @@
 import { router } from './router/index.js'
 
-console.log('app ===')
-const app = () => router()
+const app = router()
 
-export default {app } 
+export default app  

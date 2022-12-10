@@ -20,19 +20,13 @@ const parseLocation = () => location.hash.slice(1).toLocaleLowerCase() || '/'
 
 
 
-
-
-
-
 export const router = async () => {
+    
+    console.log('into router function')
+
+
+    document.querySelector('#root').innerHTML = await Header.render()
    
-    const path = parseLocation()
-
-  
-    const { component = ErrorPage } = findComponentByPath(path, routes) || {}
-
-
-    document.querySelector('#root').innerHTML = await component.render()
 
 
 }
