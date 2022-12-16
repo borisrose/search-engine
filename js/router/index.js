@@ -1,32 +1,55 @@
+import Filters from '../components/filtersSection/index.js';
+import Recipes from '../components/recipesSection/index.js';
 import Header from '../components/header/index.js'
-import ErrorPage from '../pages/404/index.js'
-import { findComponentByPath } from '../utils/findComponentByPath/index.js'
+
+
+import { handleChange } from '../utils/searchForm.js/index.js';
+
 
 console.log('into router index.js');
 
-const routes = [
+// const routes = [
 
-    {
-        path: "/",
-        component: Header
+//     {
+//         path: "/",
+//         component: Header
 
-    }
-
-
-]
+//     }
 
 
-const parseLocation = () => location.hash.slice(1).toLocaleLowerCase() || '/'
+// ]
 
 
 
-export const router = async () => {
-    
-    console.log('into router function')
 
+const bindEventListeners = async() => {
+      
+        
+    handleChange()
 
-    document.querySelector('#root').innerHTML = await Header.render()
    
 
+   
+}
+
+
+
+export const router = async() => {
+    
+   
+    localStorage.clear()
+
+    console.log('into router function')
+
+    document.querySelector('#root').innerHTML =  `
+    ${await Header.render()}
+    ${await Filters.render()}
+    ${await Recipes.render()}
+    
+    ` 
+   
+    await bindEventListeners()
+
+    
 
 }
