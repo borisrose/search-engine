@@ -9,6 +9,19 @@ import {
 let counter = 3
 
 
+function searchIngredients(recipe, e) {
+
+    for(let ingredient of recipe.ingredients) {
+
+        if(ingredient.ingredient.includes(e)){
+            return true 
+        }
+
+    }
+
+}
+
+
 
 function search (e) {
 
@@ -16,11 +29,14 @@ function search (e) {
 
     for(let recipe of recipes){
 
-        if(recipe.name.startsWith(e) || recipe.description.startsWith(e)){
+        if(recipe.name.includes(e) || recipe.description.includes(e) || searchIngredients(recipe, e)){
 
             searchData.push(recipe)
 
         }
+
+
+       
 
 
 

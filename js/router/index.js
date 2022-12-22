@@ -37,7 +37,7 @@ const bindEventListeners = async() => {
 export const router = async() => {
     
    
-    localStorage.clear()
+
 
     console.log('into router function')
 
