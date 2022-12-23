@@ -1,6 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap'); 
+
+
 body {
 
     border: solid black 5px;
+    font-family: Lato;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 22px;
+    letter-spacing: 0em;
+
+
 }
 
 
@@ -14,6 +24,21 @@ header {
     flex-direction: column;
     align-items: center;
     
+
+}
+
+
+.header-title {
+
+
+    color: #D04F4F;
+    font-family: 'DM Sans';
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 47px;
+    letter-spacing: 0em;
+ 
+
 
 }
 
@@ -37,7 +62,8 @@ header {
 }
 
 .search-engine-div {
-    background-color: rgb(241, 239, 239);
+    background: #E7E7E7;
+
     
 
     display: flex;
@@ -57,13 +83,99 @@ header {
     font-size: 1.2em;
 }
 
-.filters-div {
+
+
+.filters-keywords-div {
     display: flex;
-    border: solid green 3px;;
+    border: solid green 3px;
+  
+    flex-direction: column;
+
+}
+
+.keywords-div {
+
+    display: flex;
+    flex-direction: row;
+    border: solid blue 2px; 
+    height: 20%;
+
+}
+
+.filters-div {
+
+    display: flex;
+    flex-direction: row;
+    border: solid lightsalmon 2px;
+    height: 80%; 
+    justify-content: space-between;
+
 }
 
 
+.type-div-style {
+    display: flex;
+    width: 30%;
+    border: solid pink 2px; 
+    flex-direction: column;
+    border-radius: 5px;
+    width: 170px;
+    height: 69px;
+    color: white;
+    align-items: center;
+    justify-content: center;
 
+}
+
+
+.dual-element {
+
+    display: flex;
+    width:100%;
+}
+
+.type-input {
+
+   border: none;
+   outline: none;
+    width: 80%;
+    color: white;
+    text-indent: 10px;
+    
+    
+}
+
+.type-input::placeholder {
+    color: white;
+    text-indent: 10px;
+}
+
+.chevron-style {
+
+    width: 20%;
+    text-align: center;
+
+
+}
+
+.search-blue {
+
+    background: #3282F7;
+
+}
+
+.search-green {
+
+    background: #68D9A4;
+
+}
+
+
+.search-red {
+
+    background: #ED6454;
+
+}
 
 
 /*         ---------------------- RECIPES SECTION-----------------------------------------*/
@@ -71,21 +183,27 @@ header {
 
 #recipes-div {
 
+
     border: solid yellowgreen 3px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    flex-wrap: wrap;
+
 
 
 }
 
 .article-recipe {
 
+    margin-top: 20px;
     height: 400px;
-    width: 33%;
+    width: 30%;
     display: flex;
     flex-direction: column;
     border: solid pink 2px;
+    height: 364px;
+    width:380px;
 
 
 }
@@ -93,14 +211,15 @@ header {
 .img-section-recipe, .info-section-recipe {
 
 
-    border: solid back 1px;
+    border: solid black 1px;
     height: 50%;
 
 }
 
 .img-section-recipe {
 
-    background-color: rgb(149, 148, 148);
+    background: #C7BEBE;
+
 
 }
 
@@ -108,7 +227,8 @@ header {
 
     display: flex;
     flex-direction: column;
-    background-color: gainsboro;
+    background: #E7E7E7;
+
     padding: 10px;
     justify-content: space-between;
 }
@@ -124,7 +244,8 @@ header {
 
 .info-time-name-div p{
     font-size: 18px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    
+    
 
 }
 
@@ -138,12 +259,27 @@ header {
     border: solid purple 1px;
     font-weight: 600;
     align-items: center;
+    font-family: Lato;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 22px;
+    letter-spacing: 0em;
+
+  
+
+   
+
 }
 
 .info-name {
 
     display: flex;
     border: lightblue 1px;
+    font-family: Lato;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0em;
 
 }
 
@@ -154,25 +290,57 @@ header {
     justify-content: space-between;
     height: 80%;
     border: solid red 4px;
+
+
+    
 }
 
 .info-ing {
 
     display: flex;
     flex-direction: column;
-    width: 40%;
+    width: 171px;
+    height: 105px;
     border: solid yellow 1px;
+
+
+    font-family: Lato;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 14px;
+    letter-spacing: 0em;
+    text-align: left;
+
+
+
+
 
 }
 
 .info-des {
 
     display: flex;
-    width: 50%;
-    height: 100%;
-    border: solid orange 1px;
-    overflow-y: scroll;
+    width:171px;
+    height: 109px;
+    border: solid rgb(0, 255, 76) 1px;
+    
 
+
+
+    font-family:'Roboto';
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 12px;
+    letter-spacing: 0em;
+
+}
+
+.info-des p {
+
+
+    text-overflow: ellipsis;
+ 
+    overflow: hidden;
 }
 
 
