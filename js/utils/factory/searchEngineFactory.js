@@ -14,7 +14,7 @@ const searchTypes = [
 
 const createSearchEngine = (type) => {
 
-    console.log('into Create Search Engine')
+   
 
     const $filtersDiv = document.querySelector('.filters-div')
     
@@ -25,6 +25,10 @@ const createSearchEngine = (type) => {
                             : $typeDiv.classList.add('search-red')  
 
     $typeDiv.classList.add('type-div-style')
+
+    type === searchTypes[0] ? $typeDiv.id = 'ingredients'
+                             : type === searchTypes[1]  ? $typeDiv.id = 'appliance'
+                             : $typeDiv.id = 'ustensils'
 
     const $dualElement = document.createElement('div')
 

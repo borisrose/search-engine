@@ -56,9 +56,9 @@ const createIngredientWrapper = (ing) => {
 
 const createRecipeWrapper = (rec) => {
 
-    
 
-    console.log('rec', rec)
+
+
     const $article = document.createElement('article')
     $article.classList.add('article-recipe')
     
@@ -103,7 +103,7 @@ const createRecipeWrapper = (rec) => {
 
     $article.appendChild($imageSection)
     $article.appendChild($infoSection)
-    console.log('$article', $article)
+ 
 
     return $article
 }
@@ -119,13 +119,22 @@ export const createRecipeInterface = (data) => {
     
     if(recipes !== null){
 
-        console.log('recipes from recipeFactory', recipes)
         recipes.forEach(recipe =>    
            $recipesWrapper.appendChild(createRecipeWrapper(recipe))
         );
     }
+    else {
+      emptyRecipeInterface()  
+    }
 
 
+}
+
+export const emptyRecipeInterface = () => {
+
+    const $recipesWrapper = document.getElementById('recipes-div')
+
+    $recipesWrapper.innerHTML = ""
 }
 
 
