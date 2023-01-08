@@ -1,5 +1,7 @@
 
 
+
+
 const createIngredientWrapper = (ing) => {
 
 
@@ -75,7 +77,7 @@ const createRecipeWrapper = (rec) => {
     $nameDiv.classList.add('info-name')
     $nameDiv.innerHTML = `<p>${rec.name}</p>`
     $timeDiv.classList.add('info-time')
-    $timeDiv.innerHTML = `<i class="far fa-clock"></i><span>${rec.time}</span>` 
+    $timeDiv.innerHTML = `<i class="far fa-clock time-icon"></i><span class='time-mn'>${rec.time} mn</span>` 
 
     const $ingredientDescriptionWrapper = document.createElement('div')
     $ingredientDescriptionWrapper.classList.add('info-ing-des-div')

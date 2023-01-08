@@ -1,60 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap'); 
-
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital@0;1&display=swap'); 
 
 
 
 
 
 body {
-
-    border: solid black 5px;
-    font-family: Lato;
+    font-family: 'Lato';
     font-size: 18px;
     font-weight: 700;
     line-height: 22px;
     letter-spacing: 0em;
-
-
+    padding: 30px;
 }
 
 
 header {
-
-
     font-size: 15px;
-    border: solid red 3px;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    
-
 }
 
 
 .header-title {
-
-
     color: #D04F4F;
     font-family: 'DM Sans';
     font-size: 36px;
     font-weight: 700;
     line-height: 47px;
     letter-spacing: 0em;
- 
-
-
 }
 
 #search {
-
     background-color: transparent;
     border: none;
     height: 50px;
     text-indent: 10px;
     width: 95%;
-    border: solid green 2px;
-
 }
 
 #search::placeholder {
@@ -66,10 +50,8 @@ header {
 }
 
 .search-engine-div {
+
     background: #E7E7E7;
-
-    
-
     display: flex;
     justify-content: space-between;
 
@@ -79,9 +61,7 @@ header {
 }
 
 .search-engine-div i {
-    width: 5%;
-    
-   
+    width: 5%;  
     align-self: center;
     text-align: center;
     font-size: 1.2em;
@@ -90,63 +70,64 @@ header {
 
 
 .filters-keywords-div {
+    margin-top: 20px;
     display: flex;
-    border: solid green 3px;
-  
     flex-direction: column;
+
+    position: relative;
 
 }
 
 .keywords-div {
-
     display: flex;
     flex-direction: row;
-    border: solid blue 2px; 
-    height: 20%;
 
+    height: 20%;
 }
 
 .filters-div {
-
     display: flex;
     flex-direction: row;
-    border: solid lightsalmon 2px;
-    height: 80%; 
+    height: 56px;
     justify-content: space-between;
 
+ 
+    position: relative;
 }
 
 
 .type-div-style {
     display: flex;
-    width: 30%;
-    border: solid pink 2px; 
+    
     flex-direction: column;
     border-radius: 5px;
     width: 170px;
-    min-height: 69px;
+    min-height: 55px;
     color: white;
    
-    
-
+    z-index: 2;
+  
+  
 }
+
+
 
 
 .dual-element {
-
     display: flex;
     width:100%;
+    min-height: 55px;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
 }
 
 .type-input {
-
    border: none;
    outline: none;
-    width: 80%;
-    color: white;
-    text-indent: 10px;
-    
-    
+   width: 80%;
+   color: white;
+   text-indent: 10px;  
 }
 
 .type-input::placeholder {
@@ -155,110 +136,107 @@ header {
 }
 
 .chevron-style {
-
     width: 20%;
     text-align: center;
-
-
 }
 
 .search-blue {
-
     background: #3282F7;
-
 }
 
 .search-green {
-
     background: #68D9A4;
-
 }
 
 
 .search-red {
-
     background: #ED6454;
-
 }
 
 
-.elements-div {
+/*---------------------------------------------ELEMENTS LIST*/
 
-    border: solid white 3px;
-    display: flex;
+.elements-div {
+   
+    display: none;
     width: 100%;
-    color: black;
+
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-
+    font-size: 18px;
+    transform-origin: top;
+    animation: slow-motion 200ms ease-in;
+ 
 }
 
 .element-div {
-    border: solid black 1px;
+ 
     width: 100%;
     margin-top: 2px;
     margin-bottom: 2px;
     text-align: center;
     display: block;
+    font-family: 'Lato';
+    font-weight: 400;
+
+
+ 
+}
+
+.element-div:hover {
+   color: black;
+   cursor: pointer;
 }
 
 
+@keyframes slow-motion {
+    
+    from {
+        transform: scaleY(0);
+    }
 
+    to {
+        transform: scaleY(1);
+    }
+
+}
 
 
 /*         ---------------------- RECIPES SECTION-----------------------------------------*/
 
 
 #recipes-div {
-
-
-    border: solid yellowgreen 3px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
-
-
-
 }
 
 .article-recipe {
-
     margin-top: 20px;
     height: 400px;
     width: 30%;
     display: flex;
     flex-direction: column;
-    border: solid pink 2px;
+ 
     height: 364px;
     width:380px;
-
-
 }
 
 .img-section-recipe, .info-section-recipe {
 
-
-    border: solid black 1px;
     height: 50%;
-
 }
 
 .img-section-recipe {
-
     background: #C7BEBE;
-
-
 }
 
 .info-section-recipe {
-
     display: flex;
     flex-direction: column;
     background: #E7E7E7;
-
     padding: 10px;
     justify-content: space-between;
 }
@@ -267,16 +245,19 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border: solid green 3px;
-    height: 10%;
 
+    height: 20%;
+    border: solid green 2px;
+
+    
+    overflow: hidden;
+    
 }
 
 .info-time-name-div p{
     font-size: 18px;
     
-    
-
+   
 }
 
 .info-time-name-div p, .info-time-name-div span {
@@ -286,88 +267,80 @@ header {
 
 .info-time {
     display: flex;
-    border: solid purple 1px;
+  
     font-weight: 600;
     align-items: center;
-    font-family: Lato;
+   
     font-size: 18px;
-    font-weight: 700;
+    width: 30%;
     line-height: 22px;
     letter-spacing: 0em;
-
-  
-
-   
+    border: yellow solid 1px;
+    justify-content: center;
 
 }
 
-.info-name {
 
-    display: flex;
-    border: lightblue 1px;
-    font-family: Lato;
+
+.info-time i {
+    margin-right: 5px;
+}
+
+.info-name {
+  
+    width: 70%;
+    font-family: 'Lato';
     font-size: 18px;
     font-weight: 400;
     line-height: 22px;
     letter-spacing: 0em;
+    border: solid blue 1px;
+    text-overflow: ellipsis;
+    display: -webkit-box !important;
+    -webkit-line-clamp:1;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    margin-top: 5px;
 
 }
 
 .info-ing-des-div {
-
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     height: 80%;
-    border: solid red 4px;
-
-
-    
+    border: solid red 2px;
+  
 }
 
 .info-ing {
-
     display: flex;
     flex-direction: column;
     width: 171px;
     height: 105px;
-    border: solid yellow 1px;
 
-
-    font-family: Lato;
+    font-family: 'Lato';
     font-size: 12px;
     font-weight: 700;
     line-height: 14px;
     letter-spacing: 0em;
     text-align: left;
-
-
-
-
-
 }
 
 .info-des {
-
     display: flex;
     width:171px;
     height: 109px;
-    border: solid rgb(0, 255, 76) 1px;
-
 
     font-family:'Roboto';
     font-size: 12px;
     font-weight: 400;
     line-height: 12px;
     letter-spacing: 0em;
-  
-
-
 }
 
-.info-des p {
-   
-    text-overflow:ellipsis;
+.info-des p {  
+  text-overflow:ellipsis;
   overflow:hidden;
   display: -webkit-box !important;
   -webkit-line-clamp:7;
@@ -377,25 +350,20 @@ header {
 
 
 .ing-div {
-
     display: flex;
     flex-direction: row;
-    border: solid lightgreen 1px;
-
-
+   
 }
 
 .ing-ing-span {
-    border: solid lightpink 1px;
+
     font-weight: 600;
 }
 
 .ing-qua-span {
-
-    border: solid lightblue 1px;
+   
 }
 
 .ing-uni-span {
 
-    border: solid lightgoldenrodyellow 1px;
 }

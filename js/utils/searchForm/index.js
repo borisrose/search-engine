@@ -1,10 +1,9 @@
 import { createRecipeInterface, emptyRecipeInterface } from '../factory/recipeFactory.js'
 import { createFilteredListInterface } from '../factory/elementFactory.js'
+import { getAllRecipesWithCrossValues, search } from '../filters/recipesFilters.js'
+import { removeMultipleSameElements } from '../filters/elementsFilters.js'
 
 
-import {
-    recipes
-} from '../../../recipes.js'
 
 
 const searchTypes = [
@@ -15,72 +14,7 @@ const searchTypes = [
 
 ]
 
-
-
-
-function searchIngredients(recipe, e) {
-
-    for(let ingredient of recipe.ingredients) {
-
-        if(ingredient.ingredient.includes(e)){
-            return true 
-        }
-
-    }
-
-}
-
-function searchUstensils(recipe, e){
-
-    for(let ust of recipe.ustensils){
-
-        if(ust.includes(e)) return true
-    }
-
-}
-
-
-
-
-
-function search (e, type) {
-
-    let searchData = []
-
-    for(let recipe of recipes){
-
-        if(type){
-
-            if(type === 'Ingredients'){
-                if (searchIngredients(recipe, e)) searchData.push(recipe)
-            }
-
-            if(type === 'Ustensiles'){
-                if(searchUstensils(recipe, e)) searchData.push(recipe)
-            }
-
-            if(type === 'Appareils'){
-                if (recipe.appliance.includes(e)) searchData.push(recipe)
-            }
-        }
-        else {
-
-            if(recipe.name.includes(e) || recipe.description.includes(e) || searchIngredients(recipe, e)){
-
-                searchData.push(recipe)
-    
-            }
-
-        }
-
-    }
-
-    return(searchData)
-}
-
-
-
-
+ 
 
 function countToThree (e,type) {  
 
@@ -98,81 +32,6 @@ function countToThree (e,type) {
 
 
 
-const filterElementsByType = (foundRecipes) => {
-
-
-    let ingredientsList = []
-    let applianceList = []
-    let ustensilsList = []
-
-    for(let recipe of foundRecipes){
-
-
-        for(let ingredient of recipe.ingredients){
-
-            ingredientsList.push(ingredient.ingredient)
-
-        }
-
-        applianceList.push(recipe.appliance)
-
-        for(let ustensil of recipe.ustensils){
-
-            ustensilsList.push(ustensil)
-        }
-
-
-    }
-
-    return { ing : ingredientsList, app: applianceList, ust : ustensilsList}
-}
-
-
-const iterateOnListToFilter = (list) => {
-
-    let filteredList = list
-
-    for(let i = 0; i < list.length; i++){
-
-        for(let k = 0; k < list.length; k++){
-
-            if(list[i] == list[k]  && i !== k){
-
-                filteredList.splice(k, 1)
-              
-            }
-
-        }
-
-
-    }
-
-    return filteredList
-}
-
-
-
-
-const removeMultipleSameElements = (foundRecipes) => {
-
-   
-    const { ing, app, ust } = filterElementsByType(foundRecipes)
-
-    let newIngredientsList = iterateOnListToFilter(ing)
-    let newApplianceList = iterateOnListToFilter(app)
-    let newUstensilsList = iterateOnListToFilter(ust)
-
-
-    return { ing : newIngredientsList, app : newApplianceList, ust : newUstensilsList}
-
-
-
-    
-    
-}
-
-
-
 const handleElementsListAfterMainSearchResults = (foundRecipes) => {
 
 
@@ -186,9 +45,34 @@ const handleElementsListAfterMainSearchResults = (foundRecipes) => {
     const {ing, app, ust} = removeMultipleSameElements(foundRecipes)
 
 
-    createFilteredListInterface($ingredientsInputDiv, ing)
-    createFilteredListInterface($applianceInputDiv, app)
-    createFilteredListInterface($ustensilsInputDiv, ust)
+
+    let $divs = [$ingredientsInputDiv,$applianceInputDiv,  $ustensilsInputDiv
+    ]
+
+    let lists = [ing, app, ust]
+
+    for(let index in $divs){
+
+        if($divs[index].firstChild.nextSibling){
+            $divs[index].removeChild($divs[index].firstChild.nextSibling)
+
+        }
+        if(index === '0'){
+
+            console.log('index 0')
+            createFilteredListInterface($divs[index], lists[index], 'ingredients', foundRecipes)
+        }
+        if(index === '1'){
+            console.log('index 1')
+            createFilteredListInterface($divs[index], lists[index], 'appliance', foundRecipes)
+        }
+        if(index === '2'){
+            console.log('index 2')
+            createFilteredListInterface($divs[index], lists[index], 'ustensils', foundRecipes)
+        }
+        
+    }
+
 
 }
 
@@ -210,9 +94,13 @@ export const handleChange = () => {
                     console.log('creation')
                     createRecipeInterface(data)
 
+                 
+
+
                     //modify ingredients, appliance, ustensils
                     handleElementsListAfterMainSearchResults(data)
-
+              
+                
 
 
                 }
@@ -284,88 +172,8 @@ export const handleSearchEngineChange = (type) => {
 
 
 
-const filterRecipes = (dataObjectsArray) => {
-
-    if(dataObjectsArray.length === 1){
-        return dataObjectsArray[0]
-    }
 
 
-    if(dataObjectsArray.length === 2){
-
-        let inBothArrays = []
-
-        for(let obj of dataObjectsArray[0]){
-
-            for(let comparingObject of dataObjectsArray[1]){
-
-                if(obj === comparingObject){
-                    inBothArrays.push(obj)
-                }
-            }
-        }
-
-
-        return inBothArrays
-    }
-
-    if(dataObjectsArray.length === 3){
-
-        let inThreeArrays= []
-        let inBothArrays = []
-
-        for(let obj of dataObjectsArray[0]){
-
-
-            for(let comparingObject of dataObjectsArray[1]){
-
-
-                if(obj === comparingObject){
-                    inBothArrays.push(obj)
-                }
-
-            }
-        }
-
-        for(let obj of inBothArrays ){
-
-
-            for(let comparingObject of dataObjectsArray[2]){
-
-                if(obj === comparingObject){
-                    inThreeArrays.push(obj)
-                }
-
-            }
-        }
-
-
-        return inThreeArrays
-
-    }
-
-
-
-}
-
-
-
-const getAllRecipesWithCrossValues = (crossValues) => {
-
-    let dataObjectsArray = []
-    let selectedRecipes = []
-
-    for(let obj of crossValues){
-
-       dataObjectsArray.push(search(obj.value, obj.type))
-        
-    }
-
-    console.log('dataObjectsArray', dataObjectsArray)
-    
-    return filterRecipes(dataObjectsArray)
-
-}
 
 export const handleCrossSearchEngineChange = () => {
 

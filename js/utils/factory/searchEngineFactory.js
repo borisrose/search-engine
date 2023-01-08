@@ -54,6 +54,35 @@ const createSearchEngine = (type) => {
     $typeChevronDirection.classList.add('chevron-style')/*20% */
     $typeChevronDirection.classList.add('fa')/*20% */
     $typeChevronDirection.classList.add('fa-chevron-down')/*20% */
+
+    $typeChevronDirection.onclick = () => {
+
+      
+        let chevronClasses = Array.from($typeChevronDirection.classList);
+        if(chevronClasses[2] === 'fa-chevron-down'){
+
+            $typeChevronDirection.classList.remove('fa-chevron-down')/*20% */
+            $typeChevronDirection.classList.add('fa-chevron-up')
+
+            let $divChildren = Array.from($typeDiv.childNodes);
+
+            if($divChildren.length > 1){
+                $typeDiv.firstChild.nextSibling.style.display = 'flex'
+            }
+
+        }
+        else {
+            $typeChevronDirection.classList.remove('fa-chevron-up')
+            $typeChevronDirection.classList.add('fa-chevron-down')/*20% */
+
+            let $divChildren = Array.from($typeDiv.childNodes);
+
+            if($divChildren.length > 1){
+                $typeDiv.firstChild.nextSibling.style.display = 'none'
+            }
+        }
+
+    }
     
 
 

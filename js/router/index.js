@@ -6,7 +6,7 @@ import {createSearchEngineInterface} from '../utils/factory/searchEngineFactory.
 import { handleChange } from '../utils/searchForm/index.js';
 
 
-console.log('into router index.js');
+
 
 // const routes = [
 

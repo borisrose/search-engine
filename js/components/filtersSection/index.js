@@ -8,7 +8,7 @@ const Filters = {
           <section class='filters-keywords-div'>
 
 
-            <p>Filtrages et mot-clé <p>
+          
 
             <div class='key-words-div'></div>
 
