@@ -34,44 +34,67 @@ function countToThree (e,type) {
 
 const handleElementsListAfterMainSearchResults = (foundRecipes) => {
 
+        const $ingredientsInputDiv = document.querySelector('#ingredients');
 
-    const $ingredientsInputDiv = document.querySelector('#ingredients');
+        const $applianceInputDiv = document.querySelector('#appliance');
+    
+        const $ustensilsInputDiv = document.querySelector('#ustensils');
 
-    const $applianceInputDiv = document.querySelector('#appliance');
+    if(foundRecipes.length > 0){
 
-    const $ustensilsInputDiv = document.querySelector('#ustensils');
-
-
-    const {ing, app, ust} = removeMultipleSameElements(foundRecipes)
-
-
-
-    let $divs = [$ingredientsInputDiv,$applianceInputDiv,  $ustensilsInputDiv
-    ]
-
-    let lists = [ing, app, ust]
-
-    for(let index in $divs){
-
-        if($divs[index].firstChild.nextSibling){
-            $divs[index].removeChild($divs[index].firstChild.nextSibling)
-
-        }
-        if(index === '0'){
-
-            console.log('index 0')
-            createFilteredListInterface($divs[index], lists[index], 'ingredients', foundRecipes)
-        }
-        if(index === '1'){
-            console.log('index 1')
-            createFilteredListInterface($divs[index], lists[index], 'appliance', foundRecipes)
-        }
-        if(index === '2'){
-            console.log('index 2')
-            createFilteredListInterface($divs[index], lists[index], 'ustensils', foundRecipes)
-        }
         
+        console.log('recettes trouvées')
+        
+
+        const {ing, app, ust} = removeMultipleSameElements(foundRecipes)
+    
+    
+    
+        let $divs = [$ingredientsInputDiv,$applianceInputDiv,  $ustensilsInputDiv
+        ]
+    
+        let lists = [ing, app, ust]
+    
+        for(let index in $divs){
+    
+            if($divs[index].firstChild.nextSibling){
+                $divs[index].removeChild($divs[index].firstChild.nextSibling)
+    
+            }
+            if(index === '0'){
+    
+                console.log('index 0')
+                createFilteredListInterface($divs[index], lists[index], 'ingredients', foundRecipes)
+            }
+            if(index === '1'){
+                console.log('index 1')
+                createFilteredListInterface($divs[index], lists[index], 'appliance', foundRecipes)
+            }
+            if(index === '2'){
+                console.log('index 2')
+                createFilteredListInterface($divs[index], lists[index], 'ustensils', foundRecipes)
+            }
+            
+        }
+
+
+        return { ing, app, ust}
+
     }
+    else {
+
+        console.log('rien dans le tableau de recettes interface')
+
+        $applianceInputDiv.firstChild.nextSibling.innerHTML = ""
+        $ingredientsInputDiv.firstChild.nextSibling.innerHTML = ""
+        $ustensilsInputDiv.firstChild.nextSibling.innerHTML = ""
+
+        
+        $applianceInputDiv.firstChild.firstChild.setAttribute('placeholder', 'Appareils')
+        $ingredientsInputDiv.firstChild.firstChild.setAttribute('placeholder', 'Ingrédients')
+        $ustensilsInputDiv.firstChild.firstChild.setAttribute('placeholder', 'Ustensiles')
+    }
+   
 
 
 }
@@ -130,7 +153,6 @@ export const handleChange = () => {
 
 export const handleSearchEngineChange = (type) => {
 
-    console.log('in HSEC')
 
     const $button = document.getElementById(type)
 
@@ -141,16 +163,38 @@ export const handleSearchEngineChange = (type) => {
 
             let data = countToThree(e,type) ? countToThree(e,type) : null; 
             if(data){
-                console.log('data', data)
+                
                 if(data.length > 0){
-                    console.log('creation')
-                    /*createRecipeInterface(data)*/
+    
 
                     handleCrossSearchEngineChange()
+                    const {app, ing, ust} = handleElementsListAfterMainSearchResults(data)
+
+                    
+                    const $ingredientsInputDiv = document.querySelector('#ingredients');
+
+                    const $applianceInputDiv = document.querySelector('#appliance');
+                
+                    const $ustensilsInputDiv = document.querySelector('#ustensils');
+                    $ingredientsInputDiv.firstChild.nextSibling.remove()
+                    let arrayI = []
+                    for( let i of ing){
+                  
+                        if(i.includes(e.target.value)){
+                        
+                            arrayI.push(i)
+                            console.log('enter before create filtered',  i )        
+
+                        } 
+                        console.log(arrayI , ' array i ')
+            
+                    }
+                    createFilteredListInterface($ingredientsInputDiv, arrayI, 'ingredients', data)
+
+
                 }
                 else {
     
-                    console.log('deletion')
                     handleCrossSearchEngineChange()
                 }
                 
@@ -158,11 +202,16 @@ export const handleSearchEngineChange = (type) => {
             }
             else {
     
-                console.log('rien ne correspond dans la base de données')
                 handleCrossSearchEngineChange()
+                emptyRecipeInterface()
             }
 
         }
+        else {
+            handleElementsListAfterMainSearchResults("")
+            emptyRecipeInterface()
+        }
+      
      
        
 

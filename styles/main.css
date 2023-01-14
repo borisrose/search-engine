@@ -68,6 +68,54 @@ header {
 }
 
 
+/********************key-words-part**************************/
+
+.key-words-div {
+
+  
+    height: 30px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    justify-content: flex-start;
+
+}
+
+
+.keyword-box-div {
+    display: flex;
+    width: 10%;
+  
+    height: 100%;
+    border-radius: 10px;
+    margin-right: 5px;
+
+}
+.word-div {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 14px;
+
+}
+
+.delete-div {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+/*******************end of key words part***********************/
+
 
 .filters-keywords-div {
     margin-top: 20px;
@@ -81,6 +129,7 @@ header {
 .keywords-div {
     display: flex;
     flex-direction: row;
+
 
     height: 20%;
 }
@@ -247,7 +296,7 @@ header {
     justify-content: space-between;
 
     height: 20%;
-    border: solid green 2px;
+
 
     
     overflow: hidden;
@@ -275,7 +324,7 @@ header {
     width: 30%;
     line-height: 22px;
     letter-spacing: 0em;
-    border: yellow solid 1px;
+
     justify-content: center;
 
 }
@@ -294,7 +343,7 @@ header {
     font-weight: 400;
     line-height: 22px;
     letter-spacing: 0em;
-    border: solid blue 1px;
+ 
     text-overflow: ellipsis;
     display: -webkit-box !important;
     -webkit-line-clamp:1;
@@ -309,7 +358,7 @@ header {
     flex-direction: row;
     justify-content: space-between;
     height: 80%;
-    border: solid red 2px;
+    
   
 }
 

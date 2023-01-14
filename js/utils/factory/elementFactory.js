@@ -1,7 +1,9 @@
 import { filterRecipesViaKeyWord } from "../filters/recipesFilters.js"
+import { createKeywordInterface } from "./keywordFactory.js"
+import { createRecipeInterface } from "./recipeFactory.js"
 
 export const createFilteredListInterface = (domElement, list, type, recipes) => {
-
+ 
     const $elementsDiv = document.createElement('div')
     $elementsDiv.classList.add('elements-div')
 
@@ -12,14 +14,14 @@ export const createFilteredListInterface = (domElement, list, type, recipes) => 
     }
     if(type === 'appliance'){
         $elementsDiv.classList.add('search-green') 
-    }
+    }  
     if(type === 'ustensils'){
         $elementsDiv.classList.add('search-red') 
     }
 
-
+ 
    
-
+ 
     
     
     
@@ -36,7 +38,10 @@ export const createFilteredListInterface = (domElement, list, type, recipes) => 
              
               let updatedRecipesList = filterRecipesViaKeyWord(recipes,type,el)
 
-              console.log('updatedRecipesList', updatedRecipesList)
+              /** update recipesInterface */
+                createRecipeInterface(updatedRecipesList)
+                createKeywordInterface(el, type)
+
 
             }
 
