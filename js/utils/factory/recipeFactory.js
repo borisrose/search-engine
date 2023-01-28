@@ -85,12 +85,13 @@ const createRecipeWrapper = (rec) => {
     const $descriptionDiv = document.createElement('div')
     $ingredientDiv.classList.add('info-ing')
     
-    rec.ingredients.forEach(ing => {
 
-       
+    for(let ing of rec.ingredients){
+
         $ingredientDiv.appendChild(createIngredientWrapper(ing))
+    }
 
-    })
+
 
     $descriptionDiv.classList.add('info-des')
     $descriptionDiv.innerHTML = `<p>${rec.description}</p>`

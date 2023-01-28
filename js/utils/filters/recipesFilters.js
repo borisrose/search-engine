@@ -161,37 +161,80 @@ function searchUstensils(recipe, e){
 
 
 
-export function search (e, type) {
+export function search (e, type, selectedRecipes) {
 
     let searchData = []
 
-    for(let recipe of recipes){
+    if(selectedRecipes){
 
-        if(type){
 
-            if(type === 'Ingredients'){
-                if (searchIngredients(recipe, e)) searchData.push(recipe)
+        for(let recipe of selectedRecipes){
+    
+            if(type){
+    
+                if(type === 'Ingredients'){
+                    if (searchIngredients(recipe, e)) searchData.push(recipe)
+                }
+    
+                if(type === 'Ustensiles'){
+                    if(searchUstensils(recipe, e)) searchData.push(recipe)
+                }
+    
+                if(type === 'Appareils'){
+                    if (recipe.appliance.includes(e)) searchData.push(recipe)
+                }
             }
-
-            if(type === 'Ustensiles'){
-                if(searchUstensils(recipe, e)) searchData.push(recipe)
-            }
-
-            if(type === 'Appareils'){
-                if (recipe.appliance.includes(e)) searchData.push(recipe)
-            }
-        }
-        else {
-
-            if(recipe.name.includes(e) || recipe.description.includes(e) || searchIngredients(recipe, e)){
-
-                searchData.push(recipe)
+            else {
+    
+                if(recipe.name.includes(e) || recipe.description.includes(e) || searchIngredients(recipe, e)){
+    
+                    searchData.push(recipe)
+        
+                }
     
             }
-
+    
         }
 
+
     }
+    else {
+
+        
+
+        for(let recipe of recipes){
+    
+            if(type){
+    
+                if(type === 'Ingredients'){
+                    if (searchIngredients(recipe, e)) searchData.push(recipe)
+                }
+    
+                if(type === 'Ustensiles'){
+                    if(searchUstensils(recipe, e)) searchData.push(recipe)
+                }
+    
+                if(type === 'Appareils'){
+                    if (recipe.appliance.includes(e)) searchData.push(recipe)
+                }
+            }
+            else {
+    
+                if(recipe.name.includes(e) || recipe.description.includes(e) || searchIngredients(recipe, e)){
+    
+                    searchData.push(recipe)
+        
+                }
+    
+            }
+    
+        }
+
+
+
+    }
+
+   
 
     return(searchData)
 }

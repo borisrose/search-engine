@@ -2,6 +2,7 @@ import { createRecipeInterface, emptyRecipeInterface } from '../factory/recipeFa
 import { createFilteredListInterface } from '../factory/elementFactory.js'
 import { getAllRecipesWithCrossValues, search } from '../filters/recipesFilters.js'
 import { removeMultipleSameElements } from '../filters/elementsFilters.js'
+import { createSearchEngineInterface } from '../factory/searchEngineFactory.js'
 
 
 
@@ -16,10 +17,10 @@ const searchTypes = [
 
  
 
-function countToThree (e,type) {  
+function countToThree (e,type, selectedRecipes) {  
 
 
-    if(type) return search(e.target.value,type)
+    if(type) return search(e.target.value,type, selectedRecipes)
     if(e.target.value.length >= 3){
         let data = search(e.target.value,type)
         
@@ -83,16 +84,23 @@ const handleElementsListAfterMainSearchResults = (foundRecipes) => {
     }
     else {
 
-        console.log('rien dans le tableau de recettes interface')
+        
 
-        $applianceInputDiv.firstChild.nextSibling.innerHTML = ""
-        $ingredientsInputDiv.firstChild.nextSibling.innerHTML = ""
-        $ustensilsInputDiv.firstChild.nextSibling.innerHTML = ""
+        if($applianceInputDiv.firstChild.nextSibling && $ingredientsInputDiv.firstChild.nextSibling && $ustensilsInputDiv.firstChild.nextSibling){
+
+            $applianceInputDiv.firstChild.nextSibling.innerHTML = ""
+            $ingredientsInputDiv.firstChild.nextSibling.innerHTML = ""
+            $ustensilsInputDiv.firstChild.nextSibling.innerHTML = ""
+
+            $applianceInputDiv.firstChild.firstChild.setAttribute('placeholder', 'Appareils')
+            $ingredientsInputDiv.firstChild.firstChild.setAttribute('placeholder', 'Ingrédients')
+            $ustensilsInputDiv.firstChild.firstChild.setAttribute('placeholder', 'Ustensiles')
+
+        }
+    
 
         
-        $applianceInputDiv.firstChild.firstChild.setAttribute('placeholder', 'Appareils')
-        $ingredientsInputDiv.firstChild.firstChild.setAttribute('placeholder', 'Ingrédients')
-        $ustensilsInputDiv.firstChild.firstChild.setAttribute('placeholder', 'Ustensiles')
+      
     }
    
 
@@ -116,21 +124,40 @@ export const handleChange = () => {
                 if(data.length > 0){
                     console.log('creation')
                     createRecipeInterface(data)
-
-                 
-
-
-                    //modify ingredients, appliance, ustensils
-                    handleElementsListAfterMainSearchResults(data)
+   
               
-                
-
+                    //handling-secondarySearchEngines-after-main-fired
+                    createSearchEngineInterface(data)
+                     //modify ingredients, appliance, ustensils
+                     handleElementsListAfterMainSearchResults(data)
 
                 }
                 else {
     
                     console.log('deletion')
                     emptyRecipeInterface()
+                    handleElementsListAfterMainSearchResults("")
+
+                    const recipeDiv = document.querySelector("#recipes-div");
+
+                   
+                    const message = () => {
+                        
+                            return(
+            
+                            
+                                "<p style='font-size: '>" 
+                                + 
+                                "Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes, « poisson »" 
+                                + 
+                                "</p>"
+            
+                            )
+                    }
+        
+                    
+                    recipeDiv.innerHTML = message()
+        
                 }
                 
                
@@ -141,6 +168,13 @@ export const handleChange = () => {
         else {
             console.log('deletion')
             emptyRecipeInterface()
+            handleElementsListAfterMainSearchResults("")
+
+       
+
+            
+
+
         }
        
        
@@ -151,71 +185,212 @@ export const handleChange = () => {
 
 
 
-export const handleSearchEngineChange = (type) => {
+export const handleSearchEngineChange = (type, data) => {
 
 
-    const $button = document.getElementById(type)
+    if(data){
 
-    $button.onchange = (e) => {
+        console.log('main fired');
 
-        
-        if(e.target.value.length > 0){
+        const $button = document.getElementById(type)
 
-            let data = countToThree(e,type) ? countToThree(e,type) : null; 
-            if(data){
-                
-                if(data.length > 0){
-    
+        $button.onchange = (e) => {
 
-                    handleCrossSearchEngineChange()
-                    const {app, ing, ust} = handleElementsListAfterMainSearchResults(data)
+            if(e.target.value.length > 0){
 
+
+                let dataWith = countToThree(e,type, data) ? countToThree(e,type, data) : null; 
+
+
+                if(dataWith){
                     
-                    const $ingredientsInputDiv = document.querySelector('#ingredients');
+                    if(data.length > 0){
+        
 
-                    const $applianceInputDiv = document.querySelector('#appliance');
-                
-                    const $ustensilsInputDiv = document.querySelector('#ustensils');
-                    $ingredientsInputDiv.firstChild.nextSibling.remove()
-                    let arrayI = []
-                    for( let i of ing){
-                  
-                        if(i.includes(e.target.value)){
+                        handleCrossSearchEngineChange()
+                        const {app, ing, ust} = handleElementsListAfterMainSearchResults(data)
+
                         
-                            arrayI.push(i)
-                            console.log('enter before create filtered',  i )        
+                        const $ingredientsInputDiv = document.querySelector('#ingredients');
 
-                        } 
-                        console.log(arrayI , ' array i ')
-            
+                        const $applianceInputDiv = document.querySelector('#appliance');
+                    
+                        const $ustensilsInputDiv = document.querySelector('#ustensils');
+                        
+                        $ingredientsInputDiv.firstChild.nextSibling.remove()
+                        $applianceInputDiv.firstChild.nextSibling.remove()
+                        $ustensilsInputDiv.firstChild.nextSibling.remove()
+
+                        const filterElementsListViaInput = (elementsArray) => {
+
+                            let newFilteredList =  []
+                            for( let el of elementsArray){
+                    
+                                if(el.includes(e.target.value)){
+                                
+                                    newFilteredList.push(el)
+                                       
+    
+                                } 
+                           
+                    
+                            }
+
+                            return newFilteredList
+
+                        }
+
+                        if(type === "ingredients") {
+                            createFilteredListInterface($ingredientsInputDiv, filterElementsListViaInput(ing), 'ingredients', data)
+                        }
+                        else {
+                            createFilteredListInterface($ingredientsInputDiv, ing, 'ingredients', data)
+                        }
+
+                        if(type === 'appliance'){
+                            createFilteredListInterface($ingredientsInputDiv, filterElementsListViaInput(app), 'ingredients', data)
+                        }
+                        else {
+
+                            createFilteredListInterface($ingredientsInputDiv, app, 'ingredients', data)
+                        }
+                        
+
+                        if(type === 'ustensils'){
+                            createFilteredListInterface($applianceInputDiv, filterElementsListViaInput(ust), 'appliance', data)
+                        }
+                        else {
+                            createFilteredListInterface($ustensilsInputDiv, ust, 'ustensils', data)
+                        }
+
+
                     }
-                    createFilteredListInterface($ingredientsInputDiv, arrayI, 'ingredients', data)
-
-
+                    else {
+        
+                        handleCrossSearchEngineChange()
+                    }
+                    
+                    
                 }
                 else {
-    
+        
                     handleCrossSearchEngineChange()
+                    
                 }
-                
-                
             }
             else {
-    
-                handleCrossSearchEngineChange()
-                emptyRecipeInterface()
+                handleElementsListAfterMainSearchResults("")
+         
             }
 
         }
-        else {
-            handleElementsListAfterMainSearchResults("")
-            emptyRecipeInterface()
-        }
+
+
+
+    }
+    else {
+
+        console.log('main has not been fired')
+        const $button = document.getElementById(type)
+
+        $button.onchange = (e) => {
+
+        
+            if(e.target.value.length > 0){
+
+                let data = countToThree(e,type) ? countToThree(e,type) : null; 
+                if(data){
+                    
+                    if(data.length > 0){
+        
+
+                        handleCrossSearchEngineChange()
+                        const {app, ing, ust} = handleElementsListAfterMainSearchResults(data)
+
+                        
+                        const $ingredientsInputDiv = document.querySelector('#ingredients');
+
+                        const $applianceInputDiv = document.querySelector('#appliance');
+                    
+                        const $ustensilsInputDiv = document.querySelector('#ustensils');
+
+                        $ingredientsInputDiv.firstChild.nextSibling.remove()
+                        $applianceInputDiv.firstChild.nextSibling.remove()
+                        $ustensilsInputDiv.firstChild.nextSibling.remove()
+
+                        const filterElementsListViaInput = (elementsArray) => {
+
+                            let newFilteredList =  []
+                            for( let el of elementsArray){
+                    
+                                if(el.includes(e.target.value)){
+                                
+                                    newFilteredList.push(el)
+                                       
+    
+                                } 
+                           
+                    
+                            }
+
+                            return newFilteredList
+
+                        }
+
+                        if(type === "ingredients") {
+                            createFilteredListInterface($ingredientsInputDiv, filterElementsListViaInput(ing), 'ingredients', data)
+                        }
+                        else {
+                            createFilteredListInterface($ingredientsInputDiv, ing, 'ingredients', data)
+                        }
+
+                        if(type === 'appliance'){
+                            createFilteredListInterface($ingredientsInputDiv, filterElementsListViaInput(app), 'ingredients', data)
+                        }
+                        else {
+
+                            createFilteredListInterface($ingredientsInputDiv, app, 'ingredients', data)
+                        }
+                        
+
+                        if(type === 'ustensils'){
+                            createFilteredListInterface($applianceInputDiv, filterElementsListViaInput(ust), 'appliance', data)
+                        }
+                        else {
+                            createFilteredListInterface($ustensilsInputDiv, ust, 'ustensils', data)
+                        }
+                    
+                     
+
+                    }
+                    else {
+        
+                        handleCrossSearchEngineChange()
+                    }
+                    
+                    
+                }
+                else {
+        
+                    handleCrossSearchEngineChange()
+                    emptyRecipeInterface()
+                }
+
+            }
+            else {
+                handleElementsListAfterMainSearchResults("")
+                emptyRecipeInterface()
+            }
       
      
        
 
+        }
+
     }
+
+
+    
 
 }
 

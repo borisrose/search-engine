@@ -17,6 +17,7 @@ const createSearchEngine = (type) => {
    
 
     const $filtersDiv = document.querySelector('.filters-div')
+
     
     const $typeDiv = document.createElement('div')
 
@@ -95,14 +96,21 @@ const createSearchEngine = (type) => {
 
 
 
-export const createSearchEngineInterface = async() => {
+export const createSearchEngineInterface = async(data) => {
+
+    const $filtersDiv = document.querySelector('.filters-div')
+
+    if(Array.from($filtersDiv.childNodes).length > 0){
+        $filtersDiv.innerHTML ="";
+        console.log('Déjà des choses dans la filters-div')
+    }
 
 
-    searchTypes.forEach(t => {
+    for(let t of searchTypes){
 
         createSearchEngine(t)
-        handleSearchEngineChange(t)
-    })
+        handleSearchEngineChange(t, data)
+    }
 
 }
 

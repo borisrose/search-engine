@@ -262,6 +262,16 @@ header {
     flex-wrap: wrap;
 }
 
+
+.message-paragrah {
+
+    text-align: center;
+    color: red;
+  
+
+}
+
+
 .article-recipe {
     margin-top: 20px;
     height: 400px;
