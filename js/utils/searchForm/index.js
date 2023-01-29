@@ -3,6 +3,7 @@ import { createFilteredListInterface } from '../factory/elementFactory.js'
 import { getAllRecipesWithCrossValues, search } from '../filters/recipesFilters.js'
 import { removeMultipleSameElements } from '../filters/elementsFilters.js'
 import { createSearchEngineInterface } from '../factory/searchEngineFactory.js'
+import { classRemoverOrAdder } from '../classHandler.js'
 
 
 
@@ -96,6 +97,24 @@ const handleElementsListAfterMainSearchResults = (foundRecipes) => {
             $ingredientsInputDiv.firstChild.firstChild.setAttribute('placeholder', 'Ingrédients')
             $ustensilsInputDiv.firstChild.firstChild.setAttribute('placeholder', 'Ustensiles')
 
+           ;
+
+           let divArray = [$applianceInputDiv, $ingredientsInputDiv, $ustensilsInputDiv]
+
+           for(let el of divArray){
+
+                if(classRemoverOrAdder(Array.from(el.classList), 2, "strech-grid-like-10-21", true)){
+                    el.classList.remove("strech-grid-like-10-21")
+                }
+                if(classRemoverOrAdder(Array.from(el.classList), 2, "strech-grid-like-20-31", true)){
+                    el.classList.remove("strech-grid-like-20-31")
+                }
+
+
+           }
+
+
+          
         }
     
 
@@ -169,7 +188,8 @@ export const handleChange = () => {
             console.log('deletion')
             emptyRecipeInterface()
             handleElementsListAfterMainSearchResults("")
-
+            //handling-secondarySearchEngines-after-main-fired
+            createSearchEngineInterface()
        
 
             
@@ -248,16 +268,16 @@ export const handleSearchEngineChange = (type, data) => {
                         }
 
                         if(type === 'appliance'){
-                            createFilteredListInterface($ingredientsInputDiv, filterElementsListViaInput(app), 'ingredients', data)
+                            createFilteredListInterface($applianceInputDiv, filterElementsListViaInput(app), 'appliance', data)
                         }
                         else {
 
-                            createFilteredListInterface($ingredientsInputDiv, app, 'ingredients', data)
+                            createFilteredListInterface($applianceInputDiv, app, 'appliance', data)
                         }
                         
 
                         if(type === 'ustensils'){
-                            createFilteredListInterface($applianceInputDiv, filterElementsListViaInput(ust), 'appliance', data)
+                            createFilteredListInterface($ustensilsInputDiv, filterElementsListViaInput(ust), 'ustensils', data)
                         }
                         else {
                             createFilteredListInterface($ustensilsInputDiv, ust, 'ustensils', data)
@@ -304,6 +324,7 @@ export const handleSearchEngineChange = (type, data) => {
                     if(data.length > 0){
         
 
+                     
                         handleCrossSearchEngineChange()
                         const {app, ing, ust} = handleElementsListAfterMainSearchResults(data)
 
@@ -313,7 +334,7 @@ export const handleSearchEngineChange = (type, data) => {
                         const $applianceInputDiv = document.querySelector('#appliance');
                     
                         const $ustensilsInputDiv = document.querySelector('#ustensils');
-
+                        
                         $ingredientsInputDiv.firstChild.nextSibling.remove()
                         $applianceInputDiv.firstChild.nextSibling.remove()
                         $ustensilsInputDiv.firstChild.nextSibling.remove()
@@ -345,21 +366,21 @@ export const handleSearchEngineChange = (type, data) => {
                         }
 
                         if(type === 'appliance'){
-                            createFilteredListInterface($ingredientsInputDiv, filterElementsListViaInput(app), 'ingredients', data)
+                            createFilteredListInterface($applianceInputDiv, filterElementsListViaInput(app), 'appliance', data)
                         }
                         else {
 
-                            createFilteredListInterface($ingredientsInputDiv, app, 'ingredients', data)
+                            createFilteredListInterface($applianceInputDiv, app, 'appliance', data)
                         }
                         
 
                         if(type === 'ustensils'){
-                            createFilteredListInterface($applianceInputDiv, filterElementsListViaInput(ust), 'appliance', data)
+                            createFilteredListInterface($ustensilsInputDiv, filterElementsListViaInput(ust), 'ustensils', data)
                         }
                         else {
                             createFilteredListInterface($ustensilsInputDiv, ust, 'ustensils', data)
                         }
-                    
+
                      
 
                     }

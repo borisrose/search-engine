@@ -68,7 +68,7 @@ const createSearchEngine = (type) => {
             let $divChildren = Array.from($typeDiv.childNodes);
 
             if($divChildren.length > 1){
-                $typeDiv.firstChild.nextSibling.style.display = 'flex'
+                $typeDiv.firstChild.nextSibling.style.display = 'grid'
             }
 
         }

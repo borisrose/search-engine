@@ -146,7 +146,7 @@ header {
 
 
 .type-div-style {
-    display: flex;
+
     
     flex-direction: column;
     border-radius: 5px;
@@ -208,16 +208,43 @@ header {
 .elements-div {
    
     display: none;
-    width: 100%;
-
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     font-size: 18px;
     transform-origin: top;
     animation: slow-motion 200ms ease-in;
- 
+    
 }
+
+
+.lesser-11 {
+
+    grid-template-columns: 1fr;
+
+}
+
+
+
+.greater-10-lesser-21 {
+    grid-template-columns: 1fr 1fr; /* the width is define here */
+    grid-template-rows: auto auto auto auto auto auto auto;
+    width: 300px;
+}
+
+.greater-20-lesser-31 {
+    grid-template-columns: 1fr 1fr 1fr; /* the width is define here */
+    grid-template-rows: auto auto auto auto auto auto auto;
+    width: 500px;
+}
+
+
+.strech-grid-like-10-21 {
+
+    width: 300px;
+}
+
+.strech-grid-like-20-31 {
+    width: 500px;
+}
+
 
 .element-div {
  
@@ -225,7 +252,7 @@ header {
     margin-top: 2px;
     margin-bottom: 2px;
     text-align: center;
-    display: block;
+    display: grid;
     font-family: 'Lato';
     font-weight: 400;
 

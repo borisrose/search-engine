@@ -10,6 +10,8 @@ export const createFilteredListInterface = (domElement, list, type, recipes) => 
 
     if(type === 'ingredients'){
         $elementsDiv.classList.add('search-blue') 
+
+       
             
     }
     if(type === 'appliance'){
@@ -17,6 +19,22 @@ export const createFilteredListInterface = (domElement, list, type, recipes) => 
     }  
     if(type === 'ustensils'){
         $elementsDiv.classList.add('search-red') 
+    }
+
+
+    if(list.length <= 10){
+        $elementsDiv.classList.add('lesser-11');
+    }
+
+    if(list.length > 10 && list.length < 21){
+
+        $elementsDiv.classList.add('greater-10-lesser-21');
+        domElement.classList.add('strech-grid-like-10-21');
+    }
+
+    if(list.length > 20 && list.length < 31){
+        $elementsDiv.classList.add('greater-20-lesser-31');
+        domElement.classList.add('strech-grid-like-20-31');
     }
 
  
