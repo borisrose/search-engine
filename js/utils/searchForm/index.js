@@ -207,6 +207,7 @@ export const handleChange = () => {
 
 export const handleSearchEngineChange = (type, data) => {
 
+    console.log('data used in handleSearchEngineChange', data);
 
     if(data){
 
@@ -224,11 +225,13 @@ export const handleSearchEngineChange = (type, data) => {
 
                 if(dataWith){
                     
-                    if(data.length > 0){
+                    console.log('dataWith ',dataWith);
+
+                    if(dataWith.length > 0){
         
 
-                        handleCrossSearchEngineChange()
-                        const {app, ing, ust} = handleElementsListAfterMainSearchResults(data)
+                        handleCrossSearchEngineChange(dataWith)
+                        const {app, ing, ust} = handleElementsListAfterMainSearchResults(dataWith)
 
                         
                         const $ingredientsInputDiv = document.querySelector('#ingredients');
@@ -261,26 +264,26 @@ export const handleSearchEngineChange = (type, data) => {
                         }
 
                         if(type === "ingredients") {
-                            createFilteredListInterface($ingredientsInputDiv, filterElementsListViaInput(ing), 'ingredients', data)
+                            createFilteredListInterface($ingredientsInputDiv, filterElementsListViaInput(ing), 'ingredients', dataWtih)
                         }
                         else {
-                            createFilteredListInterface($ingredientsInputDiv, ing, 'ingredients', data)
+                            createFilteredListInterface($ingredientsInputDiv, ing, 'ingredients', dataWith)
                         }
 
                         if(type === 'appliance'){
-                            createFilteredListInterface($applianceInputDiv, filterElementsListViaInput(app), 'appliance', data)
+                            createFilteredListInterface($applianceInputDiv, filterElementsListViaInput(app), 'appliance', dataWith)
                         }
                         else {
 
-                            createFilteredListInterface($applianceInputDiv, app, 'appliance', data)
+                            createFilteredListInterface($applianceInputDiv, app, 'appliance', dataWith)
                         }
                         
 
                         if(type === 'ustensils'){
-                            createFilteredListInterface($ustensilsInputDiv, filterElementsListViaInput(ust), 'ustensils', data)
+                            createFilteredListInterface($ustensilsInputDiv, filterElementsListViaInput(ust), 'ustensils', dataWith)
                         }
                         else {
-                            createFilteredListInterface($ustensilsInputDiv, ust, 'ustensils', data)
+                            createFilteredListInterface($ustensilsInputDiv, ust, 'ustensils', dataWith)
                         }
 
 
@@ -299,7 +302,9 @@ export const handleSearchEngineChange = (type, data) => {
                 }
             }
             else {
-                handleElementsListAfterMainSearchResults("")
+
+                createRecipeInterface(data)
+                handleElementsListAfterMainSearchResults(data)
          
             }
 
@@ -420,7 +425,7 @@ export const handleSearchEngineChange = (type, data) => {
 
 
 
-export const handleCrossSearchEngineChange = () => {
+export const handleCrossSearchEngineChange = (specificRecipes) => {
 
     let crossValues = []
 
@@ -437,7 +442,7 @@ export const handleCrossSearchEngineChange = () => {
                 value: $button.value
             }
 
-            console.log('searchObject ===>', searchObject)
+            console.log('searchObject in handleCrossSearchEnginChange ===>', searchObject)
 
             crossValues.push(searchObject)
         }
@@ -446,7 +451,13 @@ export const handleCrossSearchEngineChange = () => {
         
     }
 
-    createRecipeInterface(getAllRecipesWithCrossValues(crossValues))
+    if(specificRecipes !== null){
+        createRecipeInterface(getAllRecipesWithCrossValues(crossValues, specificRecipes))
+    }
+    else {
+        createRecipeInterface(getAllRecipesWithCrossValues(crossValues))
+    }
+
 
 
     

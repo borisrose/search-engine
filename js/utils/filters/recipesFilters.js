@@ -5,16 +5,15 @@ import {
 
 
 
+ 
 
 
 export const filterRecipesViaKeyWord = (recipes, type, el) => {
 
-    console.log('recipes    =========  ', recipes)
-    console.log('type', type)
-    console.log('keyword', el)
-
+    console.log('recipes in filterRecipesViaKeyword', recipes)
 
     let filteredRecipes = [] 
+    
 
     for(let recipe of recipes){
 
@@ -28,14 +27,14 @@ export const filterRecipesViaKeyWord = (recipes, type, el) => {
             }
         }
         if(type === 'appliance'){
-           
+            
             if(recipe.appliance === el){
                 filteredRecipes.push(recipe)
             }
             
         }
         if(type === 'ustensils'){
-           
+            
             for(let ustensil of recipe.ustensils){
                 
                 if(ustensil === el){
@@ -43,17 +42,21 @@ export const filterRecipesViaKeyWord = (recipes, type, el) => {
                 }
 
             }
-              
-           
+                
+            
         }
     }
-
     
+        
+ 
     return filteredRecipes
 
 }
 
 export const filterRecipes = (dataObjectsArray) => {
+
+
+    console.log('dataObjectArray in filterRecipes 3', dataObjectsArray)
 
     if(dataObjectsArray.length === 1){
         return dataObjectsArray[0]
@@ -118,20 +121,36 @@ export const filterRecipes = (dataObjectsArray) => {
 }
 
 
-export const getAllRecipesWithCrossValues = (crossValues) => {
+export const getAllRecipesWithCrossValues = (crossValues, specificRecipes) => {
 
-    let dataObjectsArray = []
-    let selectedRecipes = []
 
-    for(let obj of crossValues){
+   
 
-       dataObjectsArray.push(search(obj.value, obj.type))
-        
-    }
+        console.log('crossValues in getAllRecipesWithCrossValue 1', crossValues);
 
-    console.log('dataObjectsArray', dataObjectsArray)
+
+        let dataObjectsArray = []
     
-    return filterRecipes(dataObjectsArray)
+    
+            for(let obj of crossValues){
+        
+                    if(specificRecipes){
+                        dataObjectsArray.push(search(obj.value, obj.type, specificRecipes))
+                    }
+                    else {
+                        dataObjectsArray.push(search(obj.value, obj.type))
+                    }
+            }
+            
+        
+    
+        console.log('dataObjectsArray in getAllRecipesWithCrossValue 2', dataObjectsArray)
+        
+        return filterRecipes(dataObjectsArray)
+
+
+    
+   
 
 }
 
