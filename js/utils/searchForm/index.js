@@ -101,7 +101,7 @@ const handleElementsListAfterMainSearchResults = (foundRecipes) => {
 
            let divArray = [$applianceInputDiv, $ingredientsInputDiv, $ustensilsInputDiv]
 
-           for(let el of divArray){
+           divArray.forEach(el => {
 
                 if(classRemoverOrAdder(Array.from(el.classList), 2, "strech-grid-like-10-21", true)){
                     el.classList.remove("strech-grid-like-10-21")
@@ -111,7 +111,7 @@ const handleElementsListAfterMainSearchResults = (foundRecipes) => {
                 }
 
 
-           }
+           })
 
 
           
@@ -346,7 +346,7 @@ export const handleSearchEngineChange = (type, data) => {
                         const filterElementsListViaInput = (elementsArray) => {
 
                             let newFilteredList =  []
-                            for( let el of elementsArray){
+                             elementsArray.forEach(el => {
                     
                                 if(el.includes(e.target.value)){
                                 
@@ -356,7 +356,7 @@ export const handleSearchEngineChange = (type, data) => {
                                 } 
                            
                     
-                            }
+                            })
 
                             return newFilteredList
 
@@ -429,7 +429,7 @@ export const handleCrossSearchEngineChange = (specificRecipes) => {
     let crossValues = []
 
 
-    for(let type of searchTypes){
+    searchTypes.forEach(type => {
 
         const $button = document.getElementById(type)
    
@@ -448,7 +448,7 @@ export const handleCrossSearchEngineChange = (specificRecipes) => {
 
            
         
-    }
+    })
 
     if(specificRecipes !== null){
         createRecipeInterface(getAllRecipesWithCrossValues(crossValues, specificRecipes))

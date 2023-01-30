@@ -106,11 +106,12 @@ export const createSearchEngineInterface = async(data) => {
     }
 
 
-    for(let t of searchTypes){
+    searchTypes.forEach((t) => {
 
+        
         createSearchEngine(t)
         handleSearchEngineChange(t, data)
-    }
+    })
 
 }
 

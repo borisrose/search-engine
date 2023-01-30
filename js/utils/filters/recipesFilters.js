@@ -15,16 +15,18 @@ export const filterRecipesViaKeyWord = (recipes, type, el) => {
     let filteredRecipes = [] 
     
 
-    for(let recipe of recipes){
+    recipes.forEach(recipe => {
 
         if(type === 'ingredients'){
 
-            for(let ingredient of recipe.ingredients){
+            recipe.ingredients.forEach((ingredient) => {
 
                 if(ingredient.ingredient === el) {
                     filteredRecipes.push(recipe)
                 }
-            }
+            })
+
+
         }
         if(type === 'appliance'){
             
@@ -35,17 +37,17 @@ export const filterRecipesViaKeyWord = (recipes, type, el) => {
         }
         if(type === 'ustensils'){
             
-            for(let ustensil of recipe.ustensils){
+            recipe.ustensils.forEach((ustensil) => {
                 
                 if(ustensil === el){
                     filteredRecipes.push(recipe)
                 }
 
-            }
+            })
                 
             
         }
-    }
+    })
     
         
  
@@ -67,15 +69,15 @@ export const filterRecipes = (dataObjectsArray) => {
 
         let inBothArrays = []
 
-        for(let obj of dataObjectsArray[0]){
+        dataObjectsArray[0].forEach((obj) => {
 
-            for(let comparingObject of dataObjectsArray[1]){
+            dataObjectsArray[1].forEach(comparingObject => {
 
                 if(obj === comparingObject){
                     inBothArrays.push(obj)
                 }
-            }
-        }
+            })
+        })
 
 
         return inBothArrays
@@ -86,29 +88,29 @@ export const filterRecipes = (dataObjectsArray) => {
         let inThreeArrays= []
         let inBothArrays = []
 
-        for(let obj of dataObjectsArray[0]){
+        dataObjectsArray[0].forEach((obj) => {
 
 
-            for(let comparingObject of dataObjectsArray[1]){
+            dataObjectsArray[1].forEach((obj) => {
 
 
                 if(obj === comparingObject){
                     inBothArrays.push(obj)
                 }
 
-            }
-        }
+            })
+        })
 
         for(let obj of inBothArrays ){
 
 
-            for(let comparingObject of dataObjectsArray[2]){
+            dataObjectsArray[2].forEach(comparingObject => {
 
                 if(obj === comparingObject){
                     inThreeArrays.push(obj)
                 }
 
-            }
+            })
         }
 
 
@@ -132,7 +134,7 @@ export const getAllRecipesWithCrossValues = (crossValues, specificRecipes) => {
         let dataObjectsArray = []
     
     
-            for(let obj of crossValues){
+            crossValues.forEach(obj => {
         
                     if(specificRecipes){
                         dataObjectsArray.push(search(obj.value, obj.type, specificRecipes))
@@ -140,7 +142,7 @@ export const getAllRecipesWithCrossValues = (crossValues, specificRecipes) => {
                     else {
                         dataObjectsArray.push(search(obj.value, obj.type))
                     }
-            }
+            })
             
         
     
@@ -156,22 +158,22 @@ export const getAllRecipesWithCrossValues = (crossValues, specificRecipes) => {
 
 function searchIngredients(recipe, e) {
 
-    for(let ingredient of recipe.ingredients) {
+    recipe.ingredients.forEach((ingredient) => {
 
         if(ingredient.ingredient.includes(e)){
             return true 
         }
 
-    }
+    })
 
 }
 
 function searchUstensils(recipe, e){
 
-    for(let ust of recipe.ustensils){
+    recipe.ustensils.forEach(ust => {
 
         if(ust.includes(e)) return true
-    }
+    })
 
 }
 
@@ -186,7 +188,7 @@ export function search (e, type, selectedRecipes) {
     if(selectedRecipes){
 
 
-        for(let recipe of selectedRecipes){
+        selectedRecipes.forEach((recipe) => {
     
             if(type){
     
@@ -212,7 +214,7 @@ export function search (e, type, selectedRecipes) {
     
             }
     
-        }
+        })
 
 
     }
@@ -220,7 +222,7 @@ export function search (e, type, selectedRecipes) {
 
         
 
-        for(let recipe of recipes){
+        recipes.forEach(recipe => {
     
             if(type){
     
@@ -246,7 +248,7 @@ export function search (e, type, selectedRecipes) {
     
             }
     
-        }
+        })
 
 
 

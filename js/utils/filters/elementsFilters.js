@@ -6,26 +6,35 @@ export const filterElementsByType = (foundRecipes) => {
     let applianceList = []
     let ustensilsList = []
 
-    for(let recipe of foundRecipes){
+   
+
+  foundRecipes.forEach(recipe => {
 
 
-        for(let ingredient of recipe.ingredients){
+    recipe.ingredients.forEach((ingredient) => {
 
-            ingredientsList.push(ingredient.ingredient)
+      ingredientsList.push(ingredient.ingredient)
 
-        }
+    })
 
-        applianceList.push(recipe.appliance)
-
-        for(let ustensil of recipe.ustensils){
-
-            ustensilsList.push(ustensil)
-        }
+    applianceList.push(recipe.appliance)
+    
 
 
-    }
+    recipe.ustensils.forEach((ustensil) => {
+      
+      ustensilsList.push(ustensil)
+    
 
-    return { ing : ingredientsList, app: applianceList, ust : ustensilsList}
+    })
+
+  })
+
+
+
+
+  
+  return { ing : ingredientsList, app: applianceList, ust : ustensilsList}
 }
 
 

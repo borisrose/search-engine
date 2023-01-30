@@ -39,13 +39,11 @@ export const createFilteredListInterface = (domElement, list, type, recipes) => 
 
  
    
- 
-    
-    
-    
-        for(let el of list){
-    
-            
+
+
+        list.forEach((el) => {
+
+            console.log('list.forEach');
             let span = document.createElement('span');
             span.classList.add('element-div')
             span.innerText = el
@@ -66,8 +64,9 @@ export const createFilteredListInterface = (domElement, list, type, recipes) => 
 
            
             $elementsDiv.appendChild(span)
-    
-        }
+
+        })
+
        
         let message = [
             'Rechercher un ingrédient',
