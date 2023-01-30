@@ -10,7 +10,7 @@ import {
 
 export const filterRecipesViaKeyWord = (recipes, type, el) => {
 
-    console.log('recipes in filterRecipesViaKeyword', recipes)
+   
 
     let filteredRecipes = [] 
     
@@ -56,7 +56,7 @@ export const filterRecipesViaKeyWord = (recipes, type, el) => {
 export const filterRecipes = (dataObjectsArray) => {
 
 
-    console.log('dataObjectArray in filterRecipes 3', dataObjectsArray)
+
 
     if(dataObjectsArray.length === 1){
         return dataObjectsArray[0]
@@ -126,7 +126,7 @@ export const getAllRecipesWithCrossValues = (crossValues, specificRecipes) => {
 
    
 
-        console.log('crossValues in getAllRecipesWithCrossValue 1', crossValues);
+
 
 
         let dataObjectsArray = []
@@ -144,7 +144,6 @@ export const getAllRecipesWithCrossValues = (crossValues, specificRecipes) => {
             
         
     
-        console.log('dataObjectsArray in getAllRecipesWithCrossValue 2', dataObjectsArray)
         
         return filterRecipes(dataObjectsArray)
 

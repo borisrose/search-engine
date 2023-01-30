@@ -45,7 +45,7 @@ const handleElementsListAfterMainSearchResults = (foundRecipes) => {
     if(foundRecipes.length > 0){
 
         
-        console.log('recettes trouvées')
+ 
         
 
         const {ing, app, ust} = removeMultipleSameElements(foundRecipes)
@@ -65,15 +65,15 @@ const handleElementsListAfterMainSearchResults = (foundRecipes) => {
             }
             if(index === '0'){
     
-                console.log('index 0')
+        
                 createFilteredListInterface($divs[index], lists[index], 'ingredients', foundRecipes)
             }
             if(index === '1'){
-                console.log('index 1')
+        
                 createFilteredListInterface($divs[index], lists[index], 'appliance', foundRecipes)
             }
             if(index === '2'){
-                console.log('index 2')
+           
                 createFilteredListInterface($divs[index], lists[index], 'ustensils', foundRecipes)
             }
             
@@ -139,9 +139,9 @@ export const handleChange = () => {
 
             let data = countToThree(e) ? countToThree(e) : null; 
             if(data){
-                console.log('data', data)
+        
                 if(data.length > 0){
-                    console.log('creation')
+                  
                     createRecipeInterface(data)
    
               
@@ -153,7 +153,7 @@ export const handleChange = () => {
                 }
                 else {
     
-                    console.log('deletion')
+              
                     emptyRecipeInterface()
                     handleElementsListAfterMainSearchResults("")
 
@@ -185,7 +185,7 @@ export const handleChange = () => {
 
         }
         else {
-            console.log('deletion')
+        
             emptyRecipeInterface()
             handleElementsListAfterMainSearchResults("")
             //handling-secondarySearchEngines-after-main-fired
@@ -207,11 +207,11 @@ export const handleChange = () => {
 
 export const handleSearchEngineChange = (type, data) => {
 
-    console.log('data used in handleSearchEngineChange', data);
+
 
     if(data){
 
-        console.log('main fired');
+     
 
         const $button = document.getElementById(type)
 
@@ -225,7 +225,7 @@ export const handleSearchEngineChange = (type, data) => {
 
                 if(dataWith){
                     
-                    console.log('dataWith ',dataWith);
+          
 
                     if(dataWith.length > 0){
         
@@ -315,7 +315,6 @@ export const handleSearchEngineChange = (type, data) => {
     }
     else {
 
-        console.log('main has not been fired')
         const $button = document.getElementById(type)
 
         $button.onchange = (e) => {
@@ -442,7 +441,7 @@ export const handleCrossSearchEngineChange = (specificRecipes) => {
                 value: $button.value
             }
 
-            console.log('searchObject in handleCrossSearchEnginChange ===>', searchObject)
+       
 
             crossValues.push(searchObject)
         }

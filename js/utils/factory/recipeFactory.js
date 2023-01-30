@@ -116,7 +116,7 @@ const createRecipeWrapper = (rec) => {
 export const createRecipeInterface = (data) => {
 
 
-    console.log('createRecipe Interface called')
+
 
     const recipes = data
 

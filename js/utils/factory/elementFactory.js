@@ -75,7 +75,7 @@ export const createFilteredListInterface = (domElement, list, type, recipes) => 
             'Rechercher un ustensil'
         ]
 
-        console.log(domElement.firstChild.firstChild)
+       
         domElement.firstChild.firstChild.placeholder = type === 'ingredients' ? message[0]
                                                                             :  type === 'appliance' ? message[1]
                                                                             : message[2]

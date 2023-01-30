@@ -39,7 +39,6 @@ export const router = async() => {
    
 
 
-    console.log('into router function')
 
     document.querySelector('#root').innerHTML =  `
     ${await Header.render()}

@@ -1,6 +1,5 @@
 export const createKeywordInterface = (el,type) => {
 
-    console.log('createKeywordInterface =================>')
     const keywordsDiv = document.querySelector('.key-words-div')
 
 
@@ -13,7 +12,7 @@ export const createKeywordInterface = (el,type) => {
 
 const createKeywordWrapper = (el, type) => {
 
-    console.log('createKeywordWrapper =================>')
+
 
     const keywordDiv = document.createElement('div')
     const deleteDiv = document.createElement('div')

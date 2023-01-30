@@ -102,7 +102,7 @@ export const createSearchEngineInterface = async(data) => {
 
     if(Array.from($filtersDiv.childNodes).length > 0){
         $filtersDiv.innerHTML ="";
-        console.log('Déjà des choses dans la filters-div')
+      
     }
 
 
